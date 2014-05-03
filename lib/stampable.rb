@@ -94,11 +94,11 @@ module Ddb #:nodoc:
             klass = "::#{stamper_class_name.to_s.singularize.camelize}"
 
             if defaults[:with_deleted]
-              belongs_to :creator, :class_name => klass, :foreign_key => creator_attribute, :with_deleted => true
-              belongs_to :updater, :class_name => klass, :foreign_key => updater_attribute, :with_deleted => true
+              belongs_to :record_creator, :class_name => klass, :foreign_key => creator_attribute, :with_deleted => true
+              belongs_to :record_updater, :class_name => klass, :foreign_key => updater_attribute, :with_deleted => true
             else
-              belongs_to :creator, :class_name => klass, :foreign_key => creator_attribute
-              belongs_to :updater, :class_name => klass, :foreign_key => updater_attribute
+              belongs_to :record_creator, :class_name => klass, :foreign_key => creator_attribute
+              belongs_to :record_updater, :class_name => klass, :foreign_key => updater_attribute
             end
 
             before_validation :set_updater_attribute
@@ -106,9 +106,9 @@ module Ddb #:nodoc:
 
             if defaults[:deleter]
               if defaults[:with_deleted]
-                belongs_to :deleter, :class_name => klass, :foreign_key => deleter_attribute, :with_deleted => true
+                belongs_to :record_deleter, :class_name => klass, :foreign_key => deleter_attribute, :with_deleted => true
               else
-                belongs_to :deleter, :class_name => klass, :foreign_key => deleter_attribute
+                belongs_to :record_deleter, :class_name => klass, :foreign_key => deleter_attribute
               end
 
               before_destroy :set_deleter_attribute
